@@ -46,7 +46,7 @@ export function Contact() {
         <div className="mt-14 grid gap-10 border-t hairline pt-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="max-w-md text-[15px] leading-relaxed text-bone/70">
-              Hiring for a frontend or React role, remote or in Karachi? Or have a small project that needs a
+              Hiring for a web developer role, remote or in Karachi? Or have a small project that needs a
               careful pair of hands? Email is the quickest way to reach me.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">

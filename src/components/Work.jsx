@@ -21,14 +21,15 @@ function ProjectRow({ project, flip }) {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         stage.current,
-        { rotateX: 16, rotateY: flip ? 14 : -14, y: 90, scale: 0.9, transformPerspective: 1600 },
+        { rotateX: 22, rotateY: flip ? 18 : -18, y: 110, scale: 0.86, z: -80, transformPerspective: 1800 },
         {
           rotateX: 0,
           rotateY: 0,
           y: 0,
           scale: 1,
+          z: 0,
           ease: 'none',
-          scrollTrigger: { trigger: row.current, start: 'top bottom', end: 'center 55%', scrub: 0.8 },
+          scrollTrigger: { trigger: row.current, start: 'top bottom', end: 'center 55%', scrub: 0.75 },
         },
       );
       gsap.to(row.current.querySelector('[data-index]'), {
@@ -61,7 +62,7 @@ function ProjectRow({ project, flip }) {
           target="_blank"
           rel="noreferrer"
           data-cursor="Open live"
-          className="block"
+          className="block [transform-style:preserve-3d]"
           aria-label={`Open ${project.title} live site`}
         >
           <div ref={stage} className="will-change-transform">
