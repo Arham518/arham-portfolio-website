@@ -1,144 +1,186 @@
-import React, { useState } from 'react';
-import { ArrowRight, Mail, Code2, Zap, Users } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
-import heroGraphic from '../assets/hero-graphic-full.jpg';
+import portrait from '../assets/arham-dark.webp';
 
-export const Hero = () => {
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+const ease = [0.22, 1, 0.36, 1];
+const INTRO_DELAY = 1.35;
 
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 8;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -8;
-    setTilt({ x, y });
-  };
+function karachiTime() {
+  return new Intl.DateTimeFormat('en-GB', {
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'Asia/Karachi',
+  }).format(new Date());
+}
 
-  const handleMouseLeave = () => {
-    setTilt({ x: 0, y: 0 });
+function useKarachiClock() {
+  const [time, setTime] = useState(karachiTime);
+  useEffect(() => {
+    const id = setInterval(() => setTime(karachiTime()), 20_000);
+    return () => clearInterval(id);
+  }, []);
+  return time;
+}
+
+function Letters({ word, delay, className }) {
+  const reduce = useReducedMotion();
+  return (
+    <span className={`inline-flex overflow-hidden ${className}`} aria-hidden="true">
+      {word.split('').map((ch, i) => (
+        <motion.span
+          key={i}
+          className="inline-block"
+          initial={{ y: reduce ? 0 : '105%' }}
+          animate={{ y: 0 }}
+          transition={{ duration: 1.1, ease, delay: reduce ? 0 : delay + i * 0.045 }}
+        >
+          {ch}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
+export function Hero() {
+  const ref = useRef(null);
+  const reduce = useReducedMotion();
+  const time = useKarachiClock();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+  const smooth = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 });
+  const titleY = useTransform(smooth, [0, 1], [0, reduce ? 0 : -140]);
+  const photoY = useTransform(smooth, [0, 1], [0, reduce ? 0 : 120]);
+  const photoScale = useTransform(smooth, [0, 1], [1, reduce ? 1 : 1.08]);
+  const fade = useTransform(smooth, [0, 0.7], [1, 0]);
+
+  // pointer parallax for the glow
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const glowX = useSpring(useTransform(px, (v) => v * 70), { stiffness: 40, damping: 20 });
+  const glowY = useSpring(useTransform(py, (v) => v * 50), { stiffness: 40, damping: 20 });
+  const onMove = (e) => {
+    if (reduce) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    px.set((e.clientX - r.left) / r.width - 0.5);
+    py.set((e.clientY - r.top) / r.height - 0.5);
   };
 
   return (
-    <section id="home" className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-white">
-      {/* Subtle background ambient gradients */}
-      <div className="absolute top-10 left-1/4 w-96 h-96 bg-indigo-100/40 rounded-full blur-3xl -z-10 pointer-events-none" />
-      <div className="absolute top-32 right-10 w-96 h-96 bg-purple-100/30 rounded-full blur-3xl -z-10 pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
-          {/* Left Column: Bio & CTAs */}
-          <div className="lg:col-span-6 xl:col-span-6 space-y-6 text-left">
-            
-            {/* Availability Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-xs sm:text-sm font-medium shadow-xs">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
-              </span>
-              <span>{PERSONAL_INFO.status}</span>
-            </div>
-
-            {/* Main Headline */}
-            <div className="space-y-1">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.12]">
-                Hi, I'm Arham
-              </h1>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight bg-gradient-to-r from-indigo-600 via-indigo-600 to-indigo-800 bg-clip-text text-transparent leading-[1.12]">
-                Web Developer.
-              </h2>
-            </div>
-
-            {/* Subtitle / Intro */}
-            <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl font-normal">
-              {PERSONAL_INFO.heroTagline}
-            </p>
-
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <a
-                href="#projects"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-indigo-600 text-white font-semibold text-sm sm:text-base hover:bg-indigo-700 active:scale-95 shadow-md shadow-indigo-500/20 hover:shadow-indigo-500/35 transition-all group"
-              >
-                <span>View My Projects</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </a>
-
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-slate-300 bg-white text-slate-700 font-semibold text-sm sm:text-base hover:border-indigo-400 hover:text-indigo-600 hover:bg-indigo-50/40 active:scale-95 transition-all"
-              >
-                <Mail className="w-4 h-4 text-indigo-600" />
-                <span>Contact Me</span>
-              </a>
-            </div>
-
-            {/* 3 Key Differentiators / Feature Badges */}
-            <div className="pt-6 grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-slate-100">
-              {/* Clean Code */}
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 border border-indigo-100">
-                  <Code2 className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 leading-tight">Clean Code</h4>
-                  <p className="text-[11px] sm:text-xs text-slate-500">Readable &amp; maintainable</p>
-                </div>
-              </div>
-
-              {/* Fast Delivery */}
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 border border-indigo-100">
-                  <Zap className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 leading-tight">Fast Delivery</h4>
-                  <p className="text-[11px] sm:text-xs text-slate-500">On time, every time</p>
-                </div>
-              </div>
-
-              {/* Client Focused */}
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 border border-indigo-100">
-                  <Users className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 leading-tight">Client Focused</h4>
-                  <p className="text-[11px] sm:text-xs text-slate-500">Your success matters</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Right Column: Exact Reference Visual Photo & Floating Elements */}
-          <div className="lg:col-span-6 xl:col-span-6 flex justify-center items-center">
-            <div
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              style={{
-                transform: `perspective(1000px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
-                transition: 'transform 0.15s ease-out',
-              }}
-              className="relative max-w-[560px] w-full rounded-2xl overflow-hidden group select-none"
-            >
-              {/* Soft backdrop glow matching reference styling */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-indigo-200/50 via-purple-200/40 to-blue-200/50 rounded-3xl blur-xl opacity-70 group-hover:opacity-100 transition-opacity" />
-
-              {/* The Hero Image with the exact portrait, code card, and badge */}
-              <div className="relative bg-white rounded-2xl overflow-hidden shadow-xl shadow-indigo-100/60 border border-slate-100/80">
-                <img
-                  src={heroGraphic}
-                  alt="Muhammad Arham Bhatti — Web Developer"
-                  className="w-full h-auto object-cover transform transition-transform duration-500 group-hover:scale-[1.01]"
-                  loading="eager"
-                  fetchPriority="high"
-                />
-              </div>
-            </div>
-          </div>
-
-        </div>
+    <section
+      id="home"
+      ref={ref}
+      onMouseMove={onMove}
+      className="relative flex min-h-[100svh] flex-col overflow-hidden px-5 pb-8 pt-28 sm:px-8 lg:px-12"
+    >
+      {/* light + grid */}
+      <motion.div
+        className="ember-glow pointer-events-none absolute -right-[15%] -top-[20%] h-[80vh] w-[80vh] rounded-full"
+        style={{ x: glowX, y: glowY }}
+      />
+      <div className="pointer-events-none absolute -bottom-[30%] -left-[20%] h-[60vh] w-[60vh] rounded-full bg-[radial-gradient(closest-side,rgba(255,91,31,0.14),transparent)] blur-2xl" />
+      <div className="pointer-events-none absolute inset-0 grid grid-cols-4 px-5 sm:px-8 lg:grid-cols-6 lg:px-12" aria-hidden="true">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <span key={i} className={`border-l hairline ${i > 3 ? 'hidden lg:block' : ''}`} />
+        ))}
       </div>
+
+      {/* top meta */}
+      <motion.div
+        className="relative z-10 flex items-start justify-between font-mono text-[11px] uppercase tracking-[0.22em] text-ash"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: INTRO_DELAY + 0.6, duration: 1 }}
+      >
+        <span>
+          Portfolio <span className="text-ember">/</span> 2026
+        </span>
+        <span className="text-right">
+          {PERSONAL_INFO.location}
+          <br className="sm:hidden" />
+          <span className="hidden sm:inline"> · </span>
+          {time} PKT
+        </span>
+      </motion.div>
+
+      {/* portrait */}
+      <motion.div
+        className="pointer-events-none absolute right-[-4%] top-[13svh] z-0 h-[50svh] sm:bottom-0 sm:right-[8%] sm:top-auto sm:h-[68svh] lg:right-[16%] lg:h-[78svh]"
+        style={{ y: photoY, scale: photoScale }}
+        initial={{ opacity: 0, filter: 'blur(12px)' }}
+        animate={{ opacity: 1, filter: 'blur(0px)' }}
+        transition={{ delay: INTRO_DELAY + 0.2, duration: 1.4, ease }}
+      >
+        <img
+          src={portrait}
+          alt="Muhammad Arham"
+          width="262"
+          height="511"
+          fetchPriority="high"
+          className="h-full w-auto object-contain opacity-90 grayscale-[35%] contrast-[1.08] [mask-composite:intersect] [mask-image:linear-gradient(to_bottom,black_55%,transparent_98%),linear-gradient(to_left,transparent_0%,black_24%)] [-webkit-mask-composite:source-in]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent mix-blend-multiply" />
+        <div className="absolute -left-6 top-[30%] h-40 w-40 rounded-full bg-ember/25 blur-3xl" />
+      </motion.div>
+
+      {/* name */}
+      <motion.div className="relative z-10 mt-auto" style={{ y: titleY, opacity: fade }}>
+        <motion.p
+          className="mb-4 flex items-center gap-2 text-sm text-bone/80 sm:mb-6"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: INTRO_DELAY + 0.5, duration: 0.8 }}
+        >
+          <span className="pulse-dot h-2 w-2 rounded-full bg-emerald-400" />
+          {PERSONAL_INFO.status}
+        </motion.p>
+
+        <h1 className="font-display font-extrabold uppercase leading-[0.82] tracking-[-0.055em]" aria-label="Muhammad Arham">
+          <Letters word="Muhammad" delay={INTRO_DELAY} className="block text-[14.6vw] sm:text-[14vw] lg:text-[12.8vw]" />
+          <span className="flex items-end gap-4 sm:gap-8">
+            <Letters word="Arham" delay={INTRO_DELAY + 0.25} className="text-[14.6vw] text-outline sm:text-[14vw] lg:text-[12.8vw]" />
+            <motion.span
+              className="mb-[1.6vw] hidden font-serif text-[2.6vw] normal-case italic leading-tight tracking-normal text-bone/80 md:block"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: INTRO_DELAY + 0.8, duration: 1, ease }}
+            >
+              frontend &amp; React
+              <br />
+              developer<span className="text-ember">.</span>
+            </motion.span>
+          </span>
+        </h1>
+      </motion.div>
+
+      {/* bottom row */}
+      <motion.div
+        className="relative z-10 mt-8 grid gap-6 border-t hairline pt-6 md:grid-cols-[1fr_auto] md:items-end"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: INTRO_DELAY + 0.7, duration: 0.9, ease }}
+      >
+        <p className="max-w-md text-[15px] leading-relaxed text-bone/70">
+          <span className="font-serif text-lg italic text-bone md:hidden">Frontend &amp; React developer. </span>
+          {PERSONAL_INFO.intro}
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <a
+            href="#work"
+            className="group inline-flex items-center gap-2 rounded-full bg-ember px-6 py-3.5 text-sm font-semibold text-ink transition-transform hover:scale-[1.03]"
+          >
+            See the work
+            <ArrowDown size={16} className="transition-transform group-hover:translate-y-0.5" />
+          </a>
+          <a
+            href={`mailto:${PERSONAL_INFO.email}`}
+            className="group inline-flex items-center gap-2 rounded-full border border-white/15 px-6 py-3.5 text-sm font-medium text-bone transition-colors hover:border-bone"
+          >
+            Say hello
+            <ArrowUpRight size={16} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
+        </div>
+      </motion.div>
     </section>
   );
-};
+}

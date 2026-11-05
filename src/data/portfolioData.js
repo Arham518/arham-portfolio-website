@@ -1,224 +1,171 @@
 /**
- * Portfolio Data Model
- * Clean, structured, OOP data architecture for Muhammad Arham Bhatti's Portfolio
+ * All portfolio content lives here so copy can be edited without touching layout code.
+ * Everything below is taken from Arham's resume and live projects. Keep it honest.
  */
 
 export const PERSONAL_INFO = {
-  name: "Arham Bhatti",
-  fullName: "Muhammad Arham Bhatti",
-  brandLogo: "Arham Bhatti",
-  role: "Web Developer",
-  roleGradient: "Web Developer.",
-  title: "Frontend React Developer",
-  status: "Available for Remote Work",
-  statusBadge: "Available for Remote Work",
-  bioHeadline: "I'm a passionate Web Developer based in Karachi, Pakistan.",
-  bioSummary: "I recently graduated with a BS in Computer Science from NED University of Engineering & Technology. I have hands-on experience in React.js, JavaScript, HTML, CSS, and modern web technologies. I enjoy building clean, responsive and scalable web applications and I'm always eager to learn new things and work on real-world projects.",
-  heroTagline: "I build modern, responsive and user-friendly web applications using React.js, JavaScript and modern technologies. I turn ideas into real, functional and scalable products.",
-  location: "Karachi, Pakistan",
-  email: "mr.arham170@gmail.com",
-  phone: "+92 310 3323518",
-  linkedin: "https://www.linkedin.com/in/arham-bhatti-b00265421/",
-  linkedinHandle: "linkedin.com/in/arham-bhatti-b00265421",
-  github: "https://github.com/Arham518",
-  githubHandle: "github.com/Arham518",
-  resumeUrl: "/resume.pdf",
+  name: 'Muhammad Arham',
+  firstName: 'Muhammad',
+  lastName: 'Arham',
+  role: 'Frontend & React Developer',
+  location: 'Karachi, Pakistan',
+  status: 'Open to remote work and Karachi roles',
+  intro:
+    "I build web apps that feel calm to use, even when the problem underneath isn't. CS graduate from NED University, working mostly in React, JavaScript and Tailwind.",
+  about: [
+    "I'm a Computer Science graduate from NED University of Engineering & Technology in Karachi. Most of my time goes into React: turning a messy workflow into a screen people can actually understand.",
+    'My final year project took me further than the browser. We trained CNN, U-Net and CycleGAN models to clean up worn fingerprints, the kind that fail at verification counters for older people and labourers, and I built the React front end that shows the pipeline at work.',
+    "I like small details: a loading state that tells you what's happening, a table that still reads well on a phone, an animation that helps instead of showing off.",
+  ],
+  email: 'mr.arham170@gmail.com',
+  phone: '+92 310 3323518',
+  phoneHref: 'tel:+923103323518',
+  linkedin: 'https://www.linkedin.com/in/muhammad-arham-b00265421',
+  github: 'https://github.com/Arham518',
+  resumeUrl: '/resume.pdf',
 };
 
 export const NAV_LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" },
+  { label: 'Work', href: '#work' },
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Contact', href: '#contact' },
 ];
 
-export const HERO_HIGHLIGHTS = [
+export const JOURNEY = [
   {
-    icon: "code",
-    title: "Clean Code",
-    subtitle: "Readable & maintainable",
-  },
-  {
-    icon: "zap",
-    title: "Fast Delivery",
-    subtitle: "On time, every time",
+    period: '2022 – 2026',
+    title: 'BS Computer Science',
+    place: 'NED University of Engineering & Technology',
+    note: 'CGPA 3.00 / 4.00',
   },
   {
-    icon: "user-check",
-    title: "Client Focused",
-    subtitle: "Your success matters",
-  },
-];
-
-export const SKILLS_LIST = [
-  { name: "React.js", category: "Frontend", color: "#06B6D4", bg: "#ECFEFF", border: "#CFFAFE", iconType: "react" },
-  { name: "JavaScript", category: "Frontend", color: "#EAB308", bg: "#FEFCE8", border: "#FEF08A", iconType: "js" },
-  { name: "HTML5", category: "Frontend", color: "#EA580C", bg: "#FFF7ED", border: "#FED7AA", iconType: "html" },
-  { name: "CSS3", category: "Frontend", color: "#2563EB", bg: "#EFF6FF", border: "#BFDBFE", iconType: "css" },
-  { name: "Tailwind CSS", category: "Frontend", color: "#0EA5E9", bg: "#F0F9FF", border: "#BAE6FD", iconType: "tailwind" },
-  { name: "Bootstrap", category: "Frontend", color: "#7C3AED", bg: "#FAF5FF", border: "#E9D5FF", iconType: "bootstrap" },
-  { name: "Redux", category: "Frontend", color: "#7E22CE", bg: "#FAF5FF", border: "#E9D5FF", iconType: "redux" },
-  { name: "REST APIs", category: "Tools", color: "#4F46E5", bg: "#EEF2FF", border: "#C7D2FE", iconType: "api" },
-  { name: "Git & GitHub", category: "Tools", color: "#E11D48", bg: "#FFF1F2", border: "#FECDD3", iconType: "git" },
-  { name: "Node.js (Basic)", category: "Backend", color: "#16A34A", bg: "#F0FDF4", border: "#BBF7D0", iconType: "node" },
-  { name: "Flask (Basic)", category: "Backend", color: "#334155", bg: "#F8FAFC", border: "#E2E8F0", iconType: "flask" },
-  { name: "C / C++ (Basic)", category: "Languages", color: "#0284C7", bg: "#F0F9FF", border: "#BAE6FD", iconType: "c" },
-  { name: "Python (Basic)", category: "Languages", color: "#CA8A04", bg: "#FEFCE8", border: "#FEF08A", iconType: "python" },
-  { name: "Responsive Design", category: "Frontend", color: "#0D9488", bg: "#F0FDFA", border: "#CCFBF1", iconType: "responsive" },
-];
-
-export const TIMELINE_CARDS = {
-  education: {
-    title: "BS Computer Science",
-    subtitle: "NED University of Engineering & Technology",
-    period: "2022 – 2026",
-    grade: "CGPA: 3.00/4.00",
-    description: "Rigorous Computer Science curriculum covering Data Structures, Algorithms, OOP, Database Systems, Software Engineering, and Modern Web Development.",
-  },
-  experience: {
-    title: "Frontend Developer Intern",
-    subtitle: "VirtuoSoft Software House",
-    period: "Mar 2025 – May 2025 (2 Months)",
-    description: "Developed responsive React.js web apps with reusable component architecture, integrated RESTful APIs, and collaborated on Git workflows.",
-  },
-  projects: {
-    title: "4+ Real Projects",
-    subtitle: "React.js | JavaScript | Tailwind CSS | Flask",
-    description: "Built end-to-end web applications featuring complex state management, custom audio players, SaaS interfaces, and biometric image processors.",
-  },
-  opportunity: {
-    title: "Open to new opportunities",
-    subtitle: "Remote • Karachi (Onsite/Hybrid) • Worldwide",
-  },
-};
-
-export const PROJECTS_DATA = [
-  {
-    id: "harmony",
-    title: "Harmony Premium Music",
-    category: "React App",
-    tagline: "Browser-based Music Player with Drag & Drop",
-    description: "A sleek, modern music player app built with React.js. Features drag-and-drop MP3 loading, playlist management, playback controls, and a premium dark aesthetic with album art focus.",
-    tags: ["React.js", "Tailwind CSS", "JavaScript", "Audio API"],
-    liveUrl: "https://harmonypremiummusic.netlify.app",
-    githubUrl: "https://github.com/Arham518",
-    badge: "Featured",
-    color: "#4f46e5",
-    gradient: "from-indigo-600 to-purple-600",
-    features: [
-      "Drag-and-drop MP3 local file loading",
-      "Dynamic queue & playlist management",
-      "Live playback progress and volume scrubbing",
-      "Minimalist dark UI with focus on album aesthetics",
-    ],
-    caseStudy: {
-      problem: "Music players often force users through registration, paywalls, or cluttered advertisements just to listen to their own music files.",
-      solution: "Engineered a client-side single page app using HTML5 Web Audio API and React state. Users can drop audio files directly into their browser with zero latency.",
-      learnings: "Deepened mastery over HTML5 audio DOM events, state synchronization, and building fluid audio visualization interfaces.",
-    }
+    period: 'Mar – May 2025',
+    title: 'Web Development Intern',
+    place: 'VirtuoSoft Software House, Karachi',
+    note: 'Turned design mockups into responsive, cross-browser pages and reusable components with the team.',
   },
   {
-    id: "flowdesk",
-    title: "FlowDesk SaaS Platform",
-    category: "SaaS & Landing",
-    tagline: "High-Converting Modern Product Experience",
-    description: "A professional SaaS product landing page with a modern dark theme, feature grids, pricing plans, testimonials, and a polished conversion-focused UI built with React.js.",
-    tags: ["React.js", "SaaS", "Tailwind CSS", "UI/UX"],
-    liveUrl: "https://flowdesk-saas-web.netlify.app",
-    githubUrl: "https://github.com/Arham518",
-    badge: "Popular",
-    color: "#2563eb",
-    gradient: "from-blue-600 to-indigo-600",
-    features: [
-      "Modern dark theme SaaS UI design system",
-      "Interactive feature matrix with icon-led cards",
-      "Multi-tier pricing plan toggler (monthly/yearly)",
-      "High Core Web Vitals score & responsive breakpoints",
-    ],
-    caseStudy: {
-      problem: "Communicating complex software features quickly while maintaining an engaging visual hierarchy and strong conversion rate.",
-      solution: "Created an intuitive visual rhythm using progressive disclosure, high-contrast callouts, and clean Tailwind design tokens.",
-      learnings: "Mastered responsive layout grids, component-level CSS optimizations, and conversion funnel UX principles.",
-    }
-  },
-  {
-    id: "gallery",
-    title: "Code Alpha Image Gallery",
-    category: "Interactive UI",
-    tagline: "Dynamic Masonry Layout with Lightbox Modal",
-    description: "An interactive image gallery application with responsive masonry layout, category filtering, lightbox modal viewer, hover animations, and smooth transitions built during CodeAlpha internship.",
-    tags: ["React.js", "CSS3 Grid", "JavaScript", "Masonry"],
-    liveUrl: "https://code-alpha-gallery.netlify.app",
-    githubUrl: "https://github.com/Arham518",
-    color: "#f59e0b",
-    gradient: "from-amber-500 to-orange-600",
-    features: [
-      "Responsive masonry layout without external bloated libraries",
-      "Instant category filtering with smooth fade transitions",
-      "Full-screen lightbox modal with image navigation",
-      "Progressive image rendering and lazy loading",
-    ],
-    caseStudy: {
-      problem: "Creating an Pinterest-style masonry grid without layout shifts or heavy third-party JavaScript libraries.",
-      solution: "Utilized pure CSS column algorithms coupled with React state to deliver instant image category filtering and modal transitions.",
-      learnings: "Strengthened algorithmic CSS layout knowledge and accessibility handling for modal dialogs.",
-    }
-  },
-  {
-    id: "retouchid",
-    title: "RE Touch ID — Fingerprint Enhancement",
-    category: "Image Processing",
-    tagline: "Biometric & Latent Fingerprint Enhancement",
-    description: "A specialized web application for fingerprint image enhancement with drag-and-drop upload, real-time processing visualization, before/after comparison, and enhancement controls.",
-    tags: ["React.js", "Canvas API", "JavaScript", "Algorithms"],
-    liveUrl: "https://reidehancemenet.netlify.app",
-    githubUrl: "https://github.com/Arham518",
-    color: "#059669",
-    gradient: "from-emerald-600 to-teal-600",
-    features: [
-      "Interactive canvas-based image processing engine",
-      "Side-by-side and overlay before/after comparison",
-      "Custom parameter tuning for ridge enhancement",
-      "Instant export of enhanced biometric images",
-    ],
-    caseStudy: {
-      problem: "Forensic fingerprint tools are predominantly heavy desktop applications unavailable on the web for rapid analysis.",
-      solution: "Leveraged HTML5 Canvas pixel manipulation algorithms integrated seamlessly inside a modern React control panel.",
-      learnings: "Acquired deep hands-on expertise in direct pixel data buffers, histogram equalization, and spatial filtering algorithms.",
-    }
+    period: '2026',
+    title: "Chairman's Medal, Best Paper",
+    place: '“Fingerprint Enhancement Using Machine Learning”',
+    note: 'Final year research paper, recognised at an international conference.',
   },
 ];
 
-export const SERVICES_DATA = [
+export const SKILL_GROUPS = [
   {
-    icon: "code",
-    title: "React.js Development",
-    description: "Building scalable, single-page web applications with modular components, custom hooks, and robust state management.",
+    label: 'Frontend',
+    items: ['React.js', 'JavaScript (ES6+)', 'React Router', 'Redux', 'Context API', 'HTML5', 'CSS3', 'Responsive Design'],
+  },
+  { label: 'UI', items: ['Tailwind CSS', 'Bootstrap', 'Material UI', 'Framer Motion'] },
+  { label: 'Backend & Data', items: ['Node.js', 'Express.js', 'Flask', 'REST APIs (Axios)', 'SQL', 'MongoDB', 'Firebase'] },
+  { label: 'ML / Imaging', items: ['Python', 'OpenCV', 'TensorFlow'] },
+  { label: 'Tools', items: ['Git & GitHub', 'npm', 'Vite', 'VS Code', 'Netlify', 'Vercel', 'C++'] },
+];
+
+export const MARQUEE_SKILLS = [
+  'React', 'JavaScript', 'Tailwind CSS', 'Node.js', 'Express', 'Flask', 'Redux', 'Python',
+  'OpenCV', 'TensorFlow', 'MongoDB', 'Firebase', 'Git', 'Vite', 'Netlify', 'Vercel',
+];
+
+/**
+ * device: 'laptop' | 'browser' | 'phone' controls the frame each recording sits in.
+ * video: base name of files in /public/videos (mp4 + webm + -poster.jpg)
+ */
+export const PROJECTS = [
+  {
+    id: 'stocksync',
+    index: '01',
+    title: 'StockSync Pro',
+    kind: 'Shopify inventory sync · frontend demo',
+    problem:
+      'Small Shopify sellers get stock sheets from suppliers in CSV or Excel and update every product by hand, which is slow and easy to get wrong.',
+    solution:
+      'A clean flow for uploading the supplier file, matching SKUs, reviewing every stock and price change, then syncing. This build is a working frontend demo with sample data.',
+    tech: ['React', 'React Router', 'Tailwind CSS', 'Framer Motion', 'Recharts', 'PapaParse'],
+    live: 'https://stocksyncpro.netlify.app',
+    github: 'https://github.com/Arham518/stocksync',
+    video: 'stocksync',
+    device: 'laptop',
+    accent: '#34d399',
   },
   {
-    icon: "palette",
-    title: "Frontend Engineering",
-    description: "Translating design mockups into pixel-perfect, accessible, and responsive HTML, CSS, and modern JavaScript.",
+    id: 'meridian',
+    index: '02',
+    title: 'Meridian Trading',
+    kind: 'Signals desk · live charts · paper account',
+    problem:
+      'Most trading signal channels post calls with no history, so you never really know which ones worked.',
+    solution:
+      'Every signal is logged with its entry, stop and targets and checked against live public market prices. A paper account lets you practise without real money.',
+    tech: ['React', 'Three.js', 'Lightweight Charts', 'Node.js', 'Express', 'Socket.io', 'PostgreSQL'],
+    live: 'https://meridian-trading.hostless.app/',
+    github: 'https://github.com/Arham518/meridian-trading-platform',
+    video: 'meridian',
+    device: 'laptop',
+    accent: '#60a5fa',
   },
   {
-    icon: "smartphone",
-    title: "Responsive Web Design",
-    description: "Ensuring web applications look and function flawlessly across desktops, tablets, and smartphones.",
+    id: 'fingerprint',
+    index: '03',
+    title: 'Fingerprint Re-Touch ID',
+    kind: "Final year project · Chairman's Medal paper",
+    problem:
+      'In Pakistan, many older people and labourers have worn or damaged fingerprints, so biometric checks for ID and banking keep failing them.',
+    solution:
+      'Deep learning models (CNN, U-Net, CycleGAN) restore ridge detail before matching. I built the React front end that talks to a Flask backend to show the enhancement.',
+    tech: ['React', 'Flask', 'Axios', 'Python', 'TensorFlow', 'OpenCV'],
+    live: 'https://reidehancemenet.netlify.app',
+    github: 'https://github.com/Arham518/re_id_enhance',
+    video: 'fingerprint',
+    device: 'browser',
+    accent: '#38bdf8',
   },
   {
-    icon: "rocket",
-    title: "Performance Optimization",
-    description: "Maximizing speed, Core Web Vitals, and SEO with lazy loading, asset compression, and clean bundle architecture.",
+    id: 'flowdesk',
+    index: '04',
+    title: 'FlowDesk',
+    kind: 'SaaS productivity platform',
+    problem:
+      'Tasks, notes and progress tracking usually live in three different apps, and switching between them breaks focus.',
+    solution:
+      'One React workspace with task management, notes and analytics views, built from reusable components and responsive from desktop down to mobile.',
+    tech: ['React', 'JavaScript', 'Tailwind CSS', 'Responsive Design'],
+    live: 'https://flowdesk-saas-web.netlify.app',
+    github: 'https://github.com/Arham518/flowdesk-saas',
+    video: 'flowdesk',
+    device: 'laptop',
+    accent: '#f59e0b',
   },
   {
-    icon: "plug",
-    title: "RESTful API Integration",
-    description: "Connecting frontend user interfaces seamlessly with backend REST APIs, authentication, and data services.",
+    id: 'harmony',
+    index: '05',
+    title: 'Harmony Music',
+    kind: 'Browser music player',
+    problem: 'Playing your own music files usually means installing an app or signing up for something.',
+    solution:
+      'A player that runs right in the browser: drop in MP3s, build a queue and control playback with a focused, album-first interface.',
+    tech: ['React', 'JavaScript', 'Web Audio', 'Tailwind CSS'],
+    live: 'https://harmonypremiummusic.netlify.app',
+    github: 'https://github.com/Arham518/MusicPlayer',
+    video: 'harmony',
+    device: 'phone',
+    accent: '#f87171',
   },
+];
+
+export const MORE_WORK = [
   {
-    icon: "sparkles",
-    title: "UI / UX Modernization",
-    description: "Revamping legacy websites into polished, modern digital experiences that engage users and drive conversions.",
+    title: 'CodeAlpha Image Gallery',
+    note: 'Responsive gallery with category filters and a lightbox, built during the CodeAlpha internship.',
+    github: 'https://github.com/Arham518/CodeAlpha_ImageGallery',
   },
+];
+
+export const SERVICES = [
+  { title: 'React front ends', text: 'Single-page apps with clear components, routing and state that the next developer can follow.' },
+  { title: 'Design to code', text: 'Figma or a screenshot turned into a responsive page that holds up on every screen size.' },
+  { title: 'Dashboards & data screens', text: 'Tables, charts and upload flows that make dense information easy to scan.' },
+  { title: 'API wiring', text: 'Connecting the UI to REST APIs with sensible loading, empty and error states.' },
 ];
