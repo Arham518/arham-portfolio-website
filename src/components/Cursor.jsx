@@ -19,6 +19,8 @@ export function Cursor() {
 
     let lastX = 0;
     let lastY = 0;
+    let hasPointer = false;
+    let scrollRaf = 0;
 
     const readLabelAt = (clientX, clientY) => {
       const el = document.elementFromPoint(clientX, clientY);
@@ -29,6 +31,7 @@ export function Cursor() {
     const move = (e) => {
       lastX = e.clientX;
       lastY = e.clientY;
+      hasPointer = true;
       x.set(e.clientX);
       y.set(e.clientY);
       setVisible(true);
@@ -36,28 +39,35 @@ export function Cursor() {
     };
 
     const leave = () => {
+      hasPointer = false;
       setVisible(false);
       setLabel('');
     };
 
     // Lenis / scroll can move a live link out from under a still mouse — re-check.
     const onScroll = () => {
-      if (!visible) return;
-      readLabelAt(lastX, lastY);
+      if (!hasPointer || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(() => {
+        scrollRaf = 0;
+        readLabelAt(lastX, lastY);
+      });
     };
 
     window.addEventListener('mousemove', move, { passive: true });
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('wheel', onScroll, { passive: true });
     document.documentElement.addEventListener('mouseleave', leave);
     window.addEventListener('blur', leave);
 
     return () => {
       window.removeEventListener('mousemove', move);
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('wheel', onScroll);
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
       document.documentElement.removeEventListener('mouseleave', leave);
       window.removeEventListener('blur', leave);
     };
-  }, [enabled, reduce, visible, x, y]);
+  }, [enabled, reduce, x, y]);
 
   if (!enabled || reduce) return null;
 

@@ -38,7 +38,7 @@ export function About() {
 
   return (
     <section id="about" className="relative overflow-hidden px-5 py-24 sm:px-8 sm:py-32 lg:px-12">
-      <FireworksBackground className="pointer-events-none absolute inset-0 opacity-40" population={0.45} />
+      <FireworksBackground className="pointer-events-none absolute inset-0 opacity-35" population={0.6} color="white" />
       <div className="relative mx-auto max-w-7xl">
         <SectionLabel index="02">About</SectionLabel>
 

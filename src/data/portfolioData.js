@@ -103,9 +103,9 @@ export const PROJECTS = [
     accent: '#34d399',
   },
   {
-    id: 'meridian',
+    id: 'crypto-decoder',
     index: '02',
-    title: 'Meridian Trading',
+    title: 'Crypto Decoder',
     kind: 'Signals desk · live charts · paper account',
     problem:
       'Most trading signal channels post calls with no history, so you never really know which ones worked.',
@@ -114,7 +114,7 @@ export const PROJECTS = [
     tech: ['React', 'Three.js', 'Lightweight Charts', 'Node.js', 'Express', 'Socket.io', 'PostgreSQL'],
     live: 'https://meridian-trading.hostless.app/',
     github: 'https://github.com/Arham518/meridian-trading-platform',
-    video: 'meridian',
+    video: 'crypto-decoder',
     device: 'laptop',
     accent: '#60a5fa',
   },

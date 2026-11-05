@@ -19,7 +19,7 @@ Built with **React 19, Vite, Tailwind CSS v4, Motion, GSAP + ScrollTrigger, Leni
 | Resume PDF download (`public/resume.pdf`) | ✅ Works |
 | Backend / CMS for editing copy | 🗓 Not required — edit `src/data/portfolioData.js` |
 
-Selected work includes TradeMatrix, Meridian Trading, Fingerprint Re-Touch ID, AVENIQ, Harmony Music, and ApexSnap.
+Selected work includes TradeMatrix, Crypto Decoder, Fingerprint Re-Touch ID, AVENIQ, Harmony Music, and ApexSnap.
 
 ## Setup
 
