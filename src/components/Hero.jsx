@@ -1,28 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
 import portrait from '../assets/arham-new.webp';
+import { GravityStarsBackground } from './effects/GravityStarsBackground';
+import { SwappingText } from './texts/SwappingText';
+import { ShimmeringText } from './texts/ShimmeringText';
 
 const ease = [0.22, 1, 0.36, 1];
 const INTRO_DELAY = 1.35;
-
-function karachiTime() {
-  return new Intl.DateTimeFormat('en-GB', {
-    hour: '2-digit',
-    minute: '2-digit',
-    timeZone: 'Asia/Karachi',
-  }).format(new Date());
-}
-
-function useKarachiClock() {
-  const [time, setTime] = useState(karachiTime);
-  useEffect(() => {
-    const id = setInterval(() => setTime(karachiTime()), 20_000);
-    return () => clearInterval(id);
-  }, []);
-  return time;
-}
 
 function Letters({ word, delay, className }) {
   const reduce = useReducedMotion();
@@ -46,7 +32,6 @@ function Letters({ word, delay, className }) {
 export function Hero() {
   const ref = useRef(null);
   const reduce = useReducedMotion();
-  const time = useKarachiClock();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const smooth = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 });
   const titleY = useTransform(smooth, [0, 1], [0, reduce ? 0 : -140]);
@@ -54,7 +39,6 @@ export function Hero() {
   const photoScale = useTransform(smooth, [0, 1], [1, reduce ? 1 : 1.08]);
   const fade = useTransform(smooth, [0, 0.7], [1, 0]);
 
-  // pointer parallax for the glow
   const px = useMotionValue(0);
   const py = useMotionValue(0);
   const glowX = useSpring(useTransform(px, (v) => v * 70), { stiffness: 40, damping: 20 });
@@ -73,21 +57,22 @@ export function Hero() {
       onMouseMove={onMove}
       className="relative flex min-h-[100svh] flex-col overflow-hidden px-5 pb-8 pt-28 sm:px-8 lg:px-12"
     >
-      {/* light + grid */}
+      <GravityStarsBackground className="pointer-events-none absolute inset-0 z-0 opacity-70" />
+
       <motion.div
-        className="ember-glow pointer-events-none absolute -right-[15%] -top-[20%] h-[80vh] w-[80vh] rounded-full"
+        className="ember-glow pointer-events-none absolute -right-[15%] -top-[20%] z-[1] h-[80vh] w-[80vh] rounded-full"
         style={{ x: glowX, y: glowY }}
       />
-      <div className="pointer-events-none absolute -bottom-[30%] -left-[20%] h-[60vh] w-[60vh] rounded-full bg-[radial-gradient(closest-side,rgba(255,91,31,0.14),transparent)] blur-2xl" />
-      <div className="pointer-events-none absolute inset-0 grid grid-cols-4 px-5 sm:px-8 lg:grid-cols-6 lg:px-12" aria-hidden="true">
+      <div className="pointer-events-none absolute -bottom-[30%] -left-[20%] z-[1] h-[60vh] w-[60vh] rounded-full bg-[radial-gradient(closest-side,rgba(255,91,31,0.14),transparent)] blur-2xl" />
+      <div className="pointer-events-none absolute inset-0 z-[1] grid grid-cols-4 px-5 sm:px-8 lg:grid-cols-6 lg:px-12" aria-hidden="true">
         {Array.from({ length: 6 }).map((_, i) => (
           <span key={i} className={`border-l hairline ${i > 3 ? 'hidden lg:block' : ''}`} />
         ))}
       </div>
 
-      {/* top meta */}
+      {/* top meta — location only, no clock */}
       <motion.div
-        className="relative z-10 flex items-start justify-between font-mono text-[11px] uppercase tracking-[0.22em] text-ash"
+        className="relative z-30 flex items-start justify-between font-mono text-[11px] uppercase tracking-[0.22em] text-ash"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: INTRO_DELAY + 0.6, duration: 1 }}
@@ -95,15 +80,10 @@ export function Hero() {
         <span>
           Portfolio <span className="text-ember">/</span> 2026
         </span>
-        <span className="text-right">
-          {PERSONAL_INFO.location}
-          <br className="sm:hidden" />
-          <span className="hidden sm:inline"> · </span>
-          {time} PKT
-        </span>
+        <span className="text-right">{PERSONAL_INFO.location}</span>
       </motion.div>
 
-      {/* portrait: in normal flow on mobile (above the name), anchored right on desktop */}
+      {/* portrait: stacked above the name up to lg, anchored right on desktop */}
       <motion.div
         className="pointer-events-none relative z-0 mx-auto mt-6 h-[42svh] max-h-[420px] w-full max-w-[340px] sm:h-[46svh] sm:max-h-[520px] sm:max-w-[460px] lg:absolute lg:bottom-0 lg:right-[6%] lg:mt-0 lg:h-[72svh] lg:max-h-none lg:w-auto lg:max-w-none"
         style={{ y: photoY, scale: photoScale }}
@@ -120,7 +100,7 @@ export function Hero() {
         />
       </motion.div>
 
-      {/* name */}
+      {/* name sits under the portrait so the face stays clear */}
       <motion.div className="relative z-20 -mt-10 lg:mt-auto lg:max-w-[62%]" style={{ y: titleY, opacity: fade }}>
         <motion.p
           className="mb-4 flex items-center gap-2 text-sm text-bone/80 sm:mb-6"
@@ -137,28 +117,31 @@ export function Hero() {
           <span className="flex items-end gap-4 sm:gap-8">
             <Letters word="Arham" delay={INTRO_DELAY + 0.25} className="text-[14.6vw] text-outline sm:text-[9.5vw] lg:text-[7.4vw]" />
             <motion.span
-              className="mb-[1.2vw] hidden font-serif text-[1.9vw] normal-case italic leading-tight tracking-normal text-bone/80 md:block"
+              className="mb-[1.2vw] hidden max-w-[14rem] font-serif text-[2.2vw] normal-case italic leading-tight tracking-normal text-bone/85 md:block"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: INTRO_DELAY + 0.8, duration: 1, ease }}
             >
-              frontend &amp; React
-              <br />
-              developer<span className="text-ember">.</span>
+              <span className="block">
+                <SwappingText words={['Design', 'Develop', 'Deploy']} className="text-[2.2vw]" />
+              </span>
+              <span className="mt-1 block not-italic">
+                <ShimmeringText text="Web Developer" className="font-display text-[1.35vw] font-semibold uppercase tracking-[0.12em]" />
+                <span className="text-ember">.</span>
+              </span>
             </motion.span>
           </span>
         </h1>
       </motion.div>
 
-      {/* bottom row */}
       <motion.div
-        className="relative z-20 mt-8 grid gap-6 border-t bg-ink/60 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-0 hairline pt-6 md:grid-cols-[1fr_auto] md:items-end"
+        className="relative z-30 mt-8 grid gap-6 border-t hairline bg-ink/60 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-0 pt-6 md:grid-cols-[1fr_auto] md:items-end"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: INTRO_DELAY + 0.7, duration: 0.9, ease }}
       >
         <p className="max-w-md text-[15px] leading-relaxed text-bone/70">
-          <span className="font-serif text-lg italic text-bone md:hidden">Frontend &amp; React developer. </span>
+          <span className="font-serif text-lg italic text-bone md:hidden">Web Developer. </span>
           {PERSONAL_INFO.intro}
         </p>
         <div className="flex flex-wrap items-center gap-3">

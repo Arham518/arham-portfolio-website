@@ -2,8 +2,10 @@ import { useLayoutEffect, useRef } from 'react';
 import { useReducedMotion } from 'motion/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Award, Briefcase, GraduationCap } from 'lucide-react';
+import { Award, Briefcase, BookOpen, GraduationCap, School } from 'lucide-react';
 import { FadeUp, SectionLabel } from './Reveal';
+import { FireworksBackground } from './effects/FireworksBackground';
+import { GradientText } from './texts/GradientText';
 import { JOURNEY, PERSONAL_INFO, SERVICES } from '../data/portfolioData';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 const STATEMENT =
   'I care about the person on the other side of the screen: the shop owner updating stock at midnight, the labourer whose fingerprint keeps failing at the bank counter.';
 
-const journeyIcons = [GraduationCap, Briefcase, Award];
+const journeyIcons = [School, BookOpen, GraduationCap, Briefcase, Award];
 
 export function About() {
   const statement = useRef(null);
@@ -35,8 +37,9 @@ export function About() {
   }, [reduce]);
 
   return (
-    <section id="about" className="relative px-5 py-24 sm:px-8 sm:py-32 lg:px-12">
-      <div className="mx-auto max-w-7xl">
+    <section id="about" className="relative overflow-hidden px-5 py-24 sm:px-8 sm:py-32 lg:px-12">
+      <FireworksBackground className="pointer-events-none absolute inset-0 opacity-35" population={0.6} color="white" />
+      <div className="relative mx-auto max-w-7xl">
         <SectionLabel index="02">About</SectionLabel>
 
         <p
@@ -49,6 +52,10 @@ export function About() {
             </span>
           ))}
         </p>
+
+        <FadeUp className="mt-8">
+          <GradientText text="Built with care, shipped with polish." className="font-serif text-2xl italic sm:text-3xl" neon />
+        </FadeUp>
 
         <div className="mt-20 grid gap-14 lg:grid-cols-12">
           <div className="space-y-5 text-[15px] leading-relaxed text-bone/70 lg:col-span-5">
@@ -64,7 +71,7 @@ export function About() {
               {JOURNEY.map((item, i) => {
                 const Icon = journeyIcons[i] ?? Award;
                 return (
-                  <FadeUp as="li" key={item.title} delay={i * 0.08} className="group grid grid-cols-[auto_1fr] gap-5 border-b hairline py-6">
+                  <FadeUp as="li" key={`${item.title}-${item.period}`} delay={i * 0.06} className="group grid grid-cols-[auto_1fr] gap-5 border-b hairline py-6">
                     <span className="grid h-11 w-11 place-items-center rounded-full border border-white/10 text-ember transition-colors group-hover:bg-ember group-hover:text-ink">
                       <Icon size={18} />
                     </span>

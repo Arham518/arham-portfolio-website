@@ -7,7 +7,7 @@ export const PERSONAL_INFO = {
   name: 'Muhammad Arham',
   firstName: 'Muhammad',
   lastName: 'Arham',
-  role: 'Frontend & React Developer',
+  role: 'Web Developer',
   location: 'Karachi, Pakistan',
   status: 'Open to remote work and Karachi roles',
   intro:
@@ -33,6 +33,18 @@ export const NAV_LINKS = [
 ];
 
 export const JOURNEY = [
+  {
+    period: '2018 – 2020',
+    title: 'Matric',
+    place: 'Sukkur Board',
+    note: 'A grade',
+  },
+  {
+    period: '2020 – 2022',
+    title: 'Intermediate',
+    place: 'Mirpurkhas Board',
+    note: 'A1 grade',
+  },
   {
     period: '2022 – 2026',
     title: 'BS Computer Science',
@@ -75,9 +87,9 @@ export const MARQUEE_SKILLS = [
  */
 export const PROJECTS = [
   {
-    id: 'stocksync',
+    id: 'tradematrix',
     index: '01',
-    title: 'StockSync Pro',
+    title: 'TradeMatrix',
     kind: 'Shopify inventory sync · frontend demo',
     problem:
       'Small Shopify sellers get stock sheets from suppliers in CSV or Excel and update every product by hand, which is slow and easy to get wrong.',
@@ -91,9 +103,9 @@ export const PROJECTS = [
     accent: '#34d399',
   },
   {
-    id: 'meridian',
+    id: 'crypto-decoder',
     index: '02',
-    title: 'Meridian Trading',
+    title: 'Crypto Decoder',
     kind: 'Signals desk · live charts · paper account',
     problem:
       'Most trading signal channels post calls with no history, so you never really know which ones worked.',
@@ -102,7 +114,7 @@ export const PROJECTS = [
     tech: ['React', 'Three.js', 'Lightweight Charts', 'Node.js', 'Express', 'Socket.io', 'PostgreSQL'],
     live: 'https://meridian-trading.hostless.app/',
     github: 'https://github.com/Arham518/meridian-trading-platform',
-    video: 'meridian',
+    video: 'crypto-decoder',
     device: 'laptop',
     accent: '#60a5fa',
   },
@@ -123,14 +135,14 @@ export const PROJECTS = [
     accent: '#38bdf8',
   },
   {
-    id: 'flowdesk',
+    id: 'aveniq',
     index: '04',
-    title: 'FlowDesk',
-    kind: 'SaaS productivity platform',
+    title: 'AVENIQ',
+    kind: 'SaaS productivity workspace',
     problem:
       'Tasks, notes and progress tracking usually live in three different apps, and switching between them breaks focus.',
     solution:
-      'One React workspace with task management, notes and analytics views, built from reusable components and responsive from desktop down to mobile.',
+      'One React workspace with task boards, notes and a light analytics view, built from reusable components that stay readable from desktop down to a phone.',
     tech: ['React', 'JavaScript', 'Tailwind CSS', 'Responsive Design'],
     live: 'https://flowdesk-saas-web.netlify.app',
     github: 'https://github.com/Arham518/flowdesk-saas',
@@ -157,8 +169,8 @@ export const PROJECTS = [
 
 export const MORE_WORK = [
   {
-    title: 'CodeAlpha Image Gallery',
-    note: 'Responsive gallery with category filters and a lightbox, built during the CodeAlpha internship.',
+    title: 'ApexSnap',
+    note: 'An image gallery with category filters, a lightbox and scroll-driven motion — built to feel like flipping through a photo book, not a folder of thumbnails.',
     github: 'https://github.com/Arham518/CodeAlpha_ImageGallery',
   },
 ];

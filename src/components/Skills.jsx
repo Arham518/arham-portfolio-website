@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from 'motion/react';
 import {
   SiAxios, SiBootstrap, SiCplusplus, SiCss, SiExpress, SiFirebase, SiFramer, SiGit, SiHtml5, SiJavascript,
   SiMongodb, SiMui, SiNetlify, SiNodedotjs, SiNpm, SiOpencv, SiPython, SiReact, SiReactrouter, SiRedux,
@@ -40,7 +41,11 @@ const ICONS = {
   'C++': SiCplusplus,
 };
 
+const ease = [0.22, 1, 0.36, 1];
+
 export function Skills() {
+  const reduce = useReducedMotion();
+
   return (
     <section id="skills" className="relative px-5 py-24 sm:px-8 sm:py-32 lg:px-12">
       <div className="mx-auto max-w-7xl">
@@ -61,23 +66,27 @@ export function Skills() {
 
           <div className="lg:col-span-8">
             {SKILL_GROUPS.map((group, gi) => (
-              <FadeUp key={group.label} delay={gi * 0.05} className="grid gap-4 border-t hairline py-6 sm:grid-cols-[160px_1fr]">
+              <div key={group.label} className="grid gap-4 border-t hairline py-6 sm:grid-cols-[160px_1fr]">
                 <p className="pt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-ash">{group.label}</p>
                 <ul className="flex flex-wrap gap-2">
-                  {group.items.map((item) => {
+                  {group.items.map((item, ii) => {
                     const Icon = ICONS[item];
                     return (
-                      <li
+                      <motion.li
                         key={item}
+                        initial={{ opacity: 0, filter: reduce ? 'blur(0px)' : 'blur(10px)', y: reduce ? 0 : 12 }}
+                        whileInView={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.55, ease, delay: gi * 0.04 + ii * 0.03 }}
                         className="group flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 text-sm text-bone/85 transition-all duration-300 hover:-translate-y-0.5 hover:border-ember/60 hover:bg-ember/10"
                       >
                         {Icon && <Icon size={15} className="text-bone/60 transition-colors group-hover:text-ember" aria-hidden="true" />}
                         {item}
-                      </li>
+                      </motion.li>
                     );
                   })}
                 </ul>
-              </FadeUp>
+              </div>
             ))}
           </div>
         </div>
