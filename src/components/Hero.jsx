@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
-import portrait from '../assets/arham-dark.webp';
+import portrait from '../assets/arham-new.webp';
 import { GravityStarsBackground } from './effects/GravityStarsBackground';
 import { SwappingText } from './texts/SwappingText';
 import { ShimmeringText } from './texts/ShimmeringText';
@@ -83,8 +83,25 @@ export function Hero() {
         <span className="text-right">{PERSONAL_INFO.location}</span>
       </motion.div>
 
+      {/* portrait: stacked above the name up to lg, anchored right on desktop */}
+      <motion.div
+        className="pointer-events-none relative z-0 mx-auto mt-6 h-[42svh] max-h-[420px] w-full max-w-[340px] sm:h-[46svh] sm:max-h-[520px] sm:max-w-[460px] lg:absolute lg:bottom-0 lg:right-[6%] lg:mt-0 lg:h-[72svh] lg:max-h-none lg:w-auto lg:max-w-none"
+        style={{ y: photoY, scale: photoScale }}
+        initial={{ opacity: 0, filter: 'blur(12px)' }}
+        animate={{ opacity: 1, filter: 'blur(0px)' }}
+        transition={{ delay: INTRO_DELAY + 0.2, duration: 1.4, ease }}
+      >
+        <div className="absolute left-1/2 top-[28%] h-48 w-48 -translate-x-1/2 rounded-full bg-ember/25 blur-3xl" />
+        <img
+          src={portrait}
+          alt="Muhammad Arham"
+          fetchPriority="high"
+          className="relative h-full w-full object-cover object-top contrast-[1.05] saturate-[0.9] lg:w-auto lg:object-contain [mask-composite:intersect] [-webkit-mask-composite:source-in] [mask-image:linear-gradient(to_bottom,black_68%,transparent_100%),linear-gradient(to_right,transparent_0%,black_12%,black_88%,transparent_100%)] lg:[mask-image:linear-gradient(to_bottom,black_70%,transparent_100%),linear-gradient(to_right,transparent_0%,black_15%)]"
+        />
+      </motion.div>
+
       {/* name sits under the portrait so the face stays clear */}
-      <motion.div className="relative z-10 mt-auto" style={{ y: titleY, opacity: fade }}>
+      <motion.div className="relative z-20 -mt-10 lg:mt-auto lg:max-w-[62%]" style={{ y: titleY, opacity: fade }}>
         <motion.p
           className="mb-4 flex items-center gap-2 text-sm text-bone/80 sm:mb-6"
           initial={{ opacity: 0, y: 12 }}
@@ -96,11 +113,11 @@ export function Hero() {
         </motion.p>
 
         <h1 className="font-display font-extrabold uppercase leading-[0.82] tracking-[-0.055em]" aria-label="Muhammad Arham">
-          <Letters word="Muhammad" delay={INTRO_DELAY} className="block text-[14.6vw] sm:text-[14vw] lg:text-[12.8vw]" />
+          <Letters word="Muhammad" delay={INTRO_DELAY} className="block text-[14.6vw] sm:text-[9.5vw] lg:text-[7.4vw]" />
           <span className="flex items-end gap-4 sm:gap-8">
-            <Letters word="Arham" delay={INTRO_DELAY + 0.25} className="text-[14.6vw] text-outline sm:text-[14vw] lg:text-[12.8vw]" />
+            <Letters word="Arham" delay={INTRO_DELAY + 0.25} className="text-[14.6vw] text-outline sm:text-[9.5vw] lg:text-[7.4vw]" />
             <motion.span
-              className="mb-[1.6vw] hidden max-w-[14rem] font-serif text-[2.2vw] normal-case italic leading-tight tracking-normal text-bone/85 md:block"
+              className="mb-[1.2vw] hidden max-w-[14rem] font-serif text-[2.2vw] normal-case italic leading-tight tracking-normal text-bone/85 md:block"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: INTRO_DELAY + 0.8, duration: 1, ease }}
@@ -117,28 +134,8 @@ export function Hero() {
         </h1>
       </motion.div>
 
-      {/* portrait above the name so eyes/face are never covered */}
       <motion.div
-        className="pointer-events-none absolute right-[-4%] top-[13svh] z-20 h-[50svh] sm:bottom-0 sm:right-[8%] sm:top-auto sm:h-[68svh] lg:right-[14%] lg:h-[78svh]"
-        style={{ y: photoY, scale: photoScale }}
-        initial={{ opacity: 0, filter: 'blur(12px)', rotateY: -8 }}
-        animate={{ opacity: 1, filter: 'blur(0px)', rotateY: 0 }}
-        transition={{ delay: INTRO_DELAY + 0.2, duration: 1.4, ease }}
-      >
-        <img
-          src={portrait}
-          alt="Muhammad Arham"
-          width="720"
-          height="960"
-          fetchPriority="high"
-          className="h-full w-auto object-contain opacity-95 grayscale-[20%] contrast-[1.1] [mask-composite:intersect] [mask-image:linear-gradient(to_bottom,black_58%,transparent_98%),linear-gradient(to_left,transparent_0%,black_18%)] [-webkit-mask-composite:source-in]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent mix-blend-multiply" />
-        <div className="absolute -left-6 top-[30%] h-40 w-40 rounded-full bg-ember/25 blur-3xl" />
-      </motion.div>
-
-      <motion.div
-        className="relative z-30 mt-8 grid gap-6 border-t hairline pt-6 md:grid-cols-[1fr_auto] md:items-end"
+        className="relative z-30 mt-8 grid gap-6 border-t hairline bg-ink/60 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-0 pt-6 md:grid-cols-[1fr_auto] md:items-end"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: INTRO_DELAY + 0.7, duration: 0.9, ease }}
