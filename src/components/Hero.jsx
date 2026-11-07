@@ -105,7 +105,7 @@ export function Hero() {
 
       {/* portrait: in normal flow on mobile (above the name), anchored right on desktop */}
       <motion.div
-        className="pointer-events-none relative z-0 mx-auto mt-6 h-[42svh] max-h-[420px] w-full max-w-[340px] sm:absolute sm:bottom-0 sm:right-[4%] sm:mt-0 sm:h-[52svh] sm:max-h-none sm:w-auto sm:max-w-none lg:right-[6%] lg:h-[72svh]"
+        className="pointer-events-none relative z-0 mx-auto mt-6 h-[42svh] max-h-[420px] w-full max-w-[340px] sm:h-[46svh] sm:max-h-[520px] sm:max-w-[460px] lg:absolute lg:bottom-0 lg:right-[6%] lg:mt-0 lg:h-[72svh] lg:max-h-none lg:w-auto lg:max-w-none"
         style={{ y: photoY, scale: photoScale }}
         initial={{ opacity: 0, filter: 'blur(12px)' }}
         animate={{ opacity: 1, filter: 'blur(0px)' }}
@@ -116,12 +116,12 @@ export function Hero() {
           src={portrait}
           alt="Muhammad Arham"
           fetchPriority="high"
-          className="relative h-full w-full object-cover object-top contrast-[1.05] saturate-[0.9] sm:w-auto sm:object-contain [mask-composite:intersect] [-webkit-mask-composite:source-in] [mask-image:linear-gradient(to_bottom,black_68%,transparent_100%),linear-gradient(to_right,transparent_0%,black_12%,black_88%,transparent_100%)] sm:[mask-image:linear-gradient(to_bottom,black_70%,transparent_100%),linear-gradient(to_right,transparent_0%,black_15%)]"
+          className="relative h-full w-full object-cover object-top contrast-[1.05] saturate-[0.9] lg:w-auto lg:object-contain [mask-composite:intersect] [-webkit-mask-composite:source-in] [mask-image:linear-gradient(to_bottom,black_68%,transparent_100%),linear-gradient(to_right,transparent_0%,black_12%,black_88%,transparent_100%)] lg:[mask-image:linear-gradient(to_bottom,black_70%,transparent_100%),linear-gradient(to_right,transparent_0%,black_15%)]"
         />
       </motion.div>
 
       {/* name */}
-      <motion.div className="relative z-20 -mt-10 sm:mt-auto sm:max-w-[58%] lg:max-w-[62%]" style={{ y: titleY, opacity: fade }}>
+      <motion.div className="relative z-20 -mt-10 lg:mt-auto lg:max-w-[62%]" style={{ y: titleY, opacity: fade }}>
         <motion.p
           className="mb-4 flex items-center gap-2 text-sm text-bone/80 sm:mb-6"
           initial={{ opacity: 0, y: 12 }}
@@ -152,7 +152,7 @@ export function Hero() {
 
       {/* bottom row */}
       <motion.div
-        className="relative z-20 mt-8 grid gap-6 border-t bg-ink/60 backdrop-blur-sm sm:bg-transparent sm:backdrop-blur-0 hairline pt-6 md:grid-cols-[1fr_auto] md:items-end"
+        className="relative z-20 mt-8 grid gap-6 border-t bg-ink/60 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-0 hairline pt-6 md:grid-cols-[1fr_auto] md:items-end"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: INTRO_DELAY + 0.7, duration: 0.9, ease }}
