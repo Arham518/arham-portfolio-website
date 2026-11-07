@@ -103,28 +103,25 @@ export function Hero() {
         </span>
       </motion.div>
 
-      {/* portrait */}
+      {/* portrait: in normal flow on mobile (above the name), anchored right on desktop */}
       <motion.div
-        className="pointer-events-none absolute right-[-4%] top-[13svh] z-0 h-[50svh] sm:bottom-0 sm:right-[8%] sm:top-auto sm:h-[68svh] lg:right-[16%] lg:h-[78svh]"
+        className="pointer-events-none relative z-0 mx-auto mt-6 h-[42svh] max-h-[420px] w-full max-w-[340px] sm:absolute sm:bottom-0 sm:right-[4%] sm:mt-0 sm:h-[62svh] sm:max-h-none sm:w-auto sm:max-w-none lg:right-[8%] lg:h-[80svh]"
         style={{ y: photoY, scale: photoScale }}
         initial={{ opacity: 0, filter: 'blur(12px)' }}
         animate={{ opacity: 1, filter: 'blur(0px)' }}
         transition={{ delay: INTRO_DELAY + 0.2, duration: 1.4, ease }}
       >
+        <div className="absolute left-1/2 top-[28%] h-48 w-48 -translate-x-1/2 rounded-full bg-ember/25 blur-3xl" />
         <img
           src={portrait}
           alt="Muhammad Arham"
-          width="262"
-          height="511"
           fetchPriority="high"
-          className="h-full w-auto object-contain opacity-90 grayscale-[35%] contrast-[1.08] [mask-composite:intersect] [mask-image:linear-gradient(to_bottom,black_55%,transparent_98%),linear-gradient(to_left,transparent_0%,black_24%)] [-webkit-mask-composite:source-in]"
+          className="relative h-full w-full object-cover object-top contrast-[1.05] saturate-[0.9] sm:w-auto sm:object-contain [mask-composite:intersect] [-webkit-mask-composite:source-in] [mask-image:linear-gradient(to_bottom,black_68%,transparent_100%),linear-gradient(to_right,transparent_0%,black_12%,black_88%,transparent_100%)] sm:[mask-image:linear-gradient(to_bottom,black_70%,transparent_100%),linear-gradient(to_right,transparent_0%,black_15%)]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent mix-blend-multiply" />
-        <div className="absolute -left-6 top-[30%] h-40 w-40 rounded-full bg-ember/25 blur-3xl" />
       </motion.div>
 
       {/* name */}
-      <motion.div className="relative z-10 mt-auto" style={{ y: titleY, opacity: fade }}>
+      <motion.div className="relative z-20 -mt-10 sm:mt-auto sm:max-w-[58%] lg:max-w-[62%]" style={{ y: titleY, opacity: fade }}>
         <motion.p
           className="mb-4 flex items-center gap-2 text-sm text-bone/80 sm:mb-6"
           initial={{ opacity: 0, y: 12 }}
@@ -136,11 +133,11 @@ export function Hero() {
         </motion.p>
 
         <h1 className="font-display font-extrabold uppercase leading-[0.82] tracking-[-0.055em]" aria-label="Muhammad Arham">
-          <Letters word="Muhammad" delay={INTRO_DELAY} className="block text-[14.6vw] sm:text-[14vw] lg:text-[12.8vw]" />
+          <Letters word="Muhammad" delay={INTRO_DELAY} className="block text-[14.6vw] sm:text-[9.5vw] lg:text-[8.8vw]" />
           <span className="flex items-end gap-4 sm:gap-8">
-            <Letters word="Arham" delay={INTRO_DELAY + 0.25} className="text-[14.6vw] text-outline sm:text-[14vw] lg:text-[12.8vw]" />
+            <Letters word="Arham" delay={INTRO_DELAY + 0.25} className="text-[14.6vw] text-outline sm:text-[9.5vw] lg:text-[8.8vw]" />
             <motion.span
-              className="mb-[1.6vw] hidden font-serif text-[2.6vw] normal-case italic leading-tight tracking-normal text-bone/80 md:block"
+              className="mb-[1.2vw] hidden font-serif text-[1.9vw] normal-case italic leading-tight tracking-normal text-bone/80 md:block"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: INTRO_DELAY + 0.8, duration: 1, ease }}
@@ -155,7 +152,7 @@ export function Hero() {
 
       {/* bottom row */}
       <motion.div
-        className="relative z-10 mt-8 grid gap-6 border-t hairline pt-6 md:grid-cols-[1fr_auto] md:items-end"
+        className="relative z-20 mt-8 grid gap-6 border-t bg-ink/60 backdrop-blur-sm sm:bg-transparent sm:backdrop-blur-0 hairline pt-6 md:grid-cols-[1fr_auto] md:items-end"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: INTRO_DELAY + 0.7, duration: 0.9, ease }}
