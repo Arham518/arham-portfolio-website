@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { PERSONAL_INFO } from '../data/portfolioData';
-import portrait from '../assets/arham-dark.webp';
+import portrait from '../assets/arham-new.webp';
 
 const ease = [0.22, 1, 0.36, 1];
 const INTRO_DELAY = 1.35;
@@ -105,7 +105,7 @@ export function Hero() {
 
       {/* portrait: in normal flow on mobile (above the name), anchored right on desktop */}
       <motion.div
-        className="pointer-events-none relative z-0 mx-auto mt-6 h-[42svh] max-h-[420px] w-full max-w-[340px] sm:absolute sm:bottom-0 sm:right-[4%] sm:mt-0 sm:h-[62svh] sm:max-h-none sm:w-auto sm:max-w-none lg:right-[8%] lg:h-[80svh]"
+        className="pointer-events-none relative z-0 mx-auto mt-6 h-[42svh] max-h-[420px] w-full max-w-[340px] sm:absolute sm:bottom-0 sm:right-[4%] sm:mt-0 sm:h-[52svh] sm:max-h-none sm:w-auto sm:max-w-none lg:right-[6%] lg:h-[72svh]"
         style={{ y: photoY, scale: photoScale }}
         initial={{ opacity: 0, filter: 'blur(12px)' }}
         animate={{ opacity: 1, filter: 'blur(0px)' }}
@@ -133,9 +133,9 @@ export function Hero() {
         </motion.p>
 
         <h1 className="font-display font-extrabold uppercase leading-[0.82] tracking-[-0.055em]" aria-label="Muhammad Arham">
-          <Letters word="Muhammad" delay={INTRO_DELAY} className="block text-[14.6vw] sm:text-[9.5vw] lg:text-[8.8vw]" />
+          <Letters word="Muhammad" delay={INTRO_DELAY} className="block text-[14.6vw] sm:text-[9.5vw] lg:text-[7.4vw]" />
           <span className="flex items-end gap-4 sm:gap-8">
-            <Letters word="Arham" delay={INTRO_DELAY + 0.25} className="text-[14.6vw] text-outline sm:text-[9.5vw] lg:text-[8.8vw]" />
+            <Letters word="Arham" delay={INTRO_DELAY + 0.25} className="text-[14.6vw] text-outline sm:text-[9.5vw] lg:text-[7.4vw]" />
             <motion.span
               className="mb-[1.2vw] hidden font-serif text-[1.9vw] normal-case italic leading-tight tracking-normal text-bone/80 md:block"
               initial={{ opacity: 0, x: -20 }}
